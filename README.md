@@ -1,8 +1,8 @@
 # Parser-Project
 
-Group Name - 
+Group Name - Segmentation Fault ( Core Dumped )
 
-Programming Language ( OOP ) - 
+Programming Language ( OOP ) - Python
 
 Group Members:
   1) Joey Gallichio
