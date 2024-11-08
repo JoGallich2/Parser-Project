@@ -26,7 +26,7 @@ expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic
 VARNAME: [a-zA-Z_][a-zA-Z_0-9]*;
 
 // Number literal, supports decimals
-NUMBER: [0-9]+ ('.' [0-9]+)?;
+NUMBER: '-'? [0-9]+ ('.'[0-9]+)?;
 
 // Boolean literals
 BOOLEAN: 'True' | 'False';
