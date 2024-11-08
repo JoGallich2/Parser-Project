@@ -22,6 +22,19 @@ expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic
     | '(' expr ')'  // Parentheses for grouping
     ;
 
+// Arithmetic operation restrictions based on types
+number_expr: NUMBER                              // Numbers only for arithmetic
+           | expr ('+' | '-' | '*' | '/' | '%') expr  // Arithmetic between numbers
+           ;
+
+boolean_expr: BOOLEAN                           // Boolean value
+            | expr ('+' | '-' | '*' | '/' | '%') expr  // Arithmetic for booleans (treated as 0/1)
+            ;
+
+string_expr: STRING                            // String literal
+           | expr ('+' | '-' | '*' | '/' | '%') expr  // Concatenation for strings
+           ;
+
 // Variable naming rule matching Python variable naming rules
 VARNAME: [a-zA-Z_][a-zA-Z_0-9]*;
 
