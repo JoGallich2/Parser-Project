@@ -50,7 +50,7 @@ STRING: '"' .*? '"' | '\'' .*? '\'';
 // Skip whitespace and newlines
 WS: [\r\n]+ -> skip;
 // For if statements, any number of tabs
-TAB: [\t]*
+TAB: [\t]*;
 
 // Support comments (e.g., # This is a comment)
 COMMENT: '#' ~[\r\n]* -> skip;
