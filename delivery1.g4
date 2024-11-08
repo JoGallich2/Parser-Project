@@ -3,7 +3,7 @@ grammar delivery1;
 start: (dclr | expr) EOF
 	 ;
 
-dclr: TYPE VARNAME '=' NUM
+dclr: TYPE VARNAME ('='| '+=' | '-=' | '*=' | '/=') expr
 	;
 
 expr: expr '*' expr
