@@ -4,14 +4,14 @@ grammar Deliverable1;
 prog: s* EOF;
 
 // Statements
-s: assignment 
- | array_assignment;
+s: TAB assignment 
+ | TAB array_assignment;
 
 // Assignment operations (simple and compound)
-assignment: VARNAME '=' expr | VARNAME ('+=' | '-=' | '*=' | '/=') expr;
+assignment: TAB VARNAME '=' expr | TAB VARNAME ('+=' | '-=' | '*=' | '/=') expr;
 
 // Array assignments with potential multiple expressions
-array_assignment: VARNAME '=' '[' (expr (',' expr)*)? ']';
+array_assignment: TAB VARNAME '=' '[' (expr (',' expr)*)? ']';
 
 // Expression rules
 expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic
@@ -48,7 +48,9 @@ BOOLEAN: 'True' | 'False';
 STRING: '"' .*? '"' | '\'' .*? '\'';
 
 // Skip whitespace and newlines
-WS: [ \t\r\n]+ -> skip;
+WS: [\r\n]+ -> skip;
+// For if statements, any number of tabs
+TAB: [\t]*
 
 // Support comments (e.g., # This is a comment)
 COMMENT: '#' ~[\r\n]* -> skip;
