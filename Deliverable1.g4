@@ -17,6 +17,8 @@ array_assignment: TAB VARNAME '=' '[' (expr (',' expr)*)? ']';
 expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic
     | VARNAME   // Variable reference
     | NUMBER    // Number literal
+    | BOOLEAN   // Boolean literal
+    | STRING    // String literal
     | '(' expr ')'  // Parentheses for grouping
     ;
 
