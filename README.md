@@ -1,10 +1,9 @@
-# Parser-Project
-
 # Project Overview
-This project involves building a custom parser for a subset of the Python programming language using ANTLR4. The parser supports basic arithmetic operations, compound assignment operations, and array definitions. It ensures syntactical correctness for these expressions and assignments, while enforcing restrictions on improper operations (e.g., boolean + number or string + boolean).
+
+  This project involves building a custom parser for a subset of the Python programming language using ANTLR4. The parser supports basic arithmetic operations, compound assignment operations, and array definitions. It ensures syntactical correctness for these   expressions and assignments, while enforcing restrictions on improper operations (e.g., boolean + number or string + boolean).
 
 
-**Group Name - Segmentation Fault ( Core Dumped )**
+  **Group Name - Segmentation Fault ( Core Dumped )**
 
   Programming Language ( OOP ) - Python
 
@@ -17,7 +16,7 @@ This project involves building a custom parser for a subset of the Python progra
 
 # Requirements and Setup
 
-**Environment:**
-  Python 3.8+
-  ANTLR 4.13.2 (or higher)
-  JDK 11+ (required for running ANTLR tools)
+  **Environment:**
+    Python 3.8+
+    ANTLR 4.13.2 (or higher)
+    JDK 11+ (required for running ANTLR tools)
