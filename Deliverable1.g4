@@ -16,6 +16,14 @@ assignment: VARNAME '=' expr
 // Array assignments with potential multiple expressions
 array_assignment: VARNAME '=' '[' (expr (',' expr)*)? ']';
 
+// Conditional expressions
+condition: expr ('<' | '<=' | '>' | '>=' | '==' | '!=') expr  // Relational operators
+         | expr AND expr                                      // Logical AND
+         | expr OR expr                                       // Logical OR
+         | NOT expr                                           // Logical NOT
+         | '(' condition ')'                                  // Parentheses for grouping
+         ;
+
 // Expression rules
 expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic expressions
     | VARNAME   // Variable reference
