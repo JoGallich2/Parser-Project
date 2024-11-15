@@ -1,4 +1,4 @@
-grammar Parser1;
+grammar Deliverable2;
 
 prog: s* EOF;
 
