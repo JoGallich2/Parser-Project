@@ -37,7 +37,7 @@ COMMENT: '#' ~[\r\n]* -> skip;
 WS: [\t]+ -> skip;
 
 //handling indents
-INDENT: SPACES+ {pushIndent(getText().length())}?;
-DEDENT: {popIndent()}?;
+INDENT: SPACES+ {getIndentationLevel() > getCurrentLevel()}?;
+DEDENT: SPACES+ {getIndentationLevel() < getCurrentLevel()}?;
 SPACES: [ ]+ -> channel(HIDDEN);
 
