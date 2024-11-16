@@ -1,6 +1,6 @@
 from antlr4 import *
-from Deliverable2Lexer import Deliverable2Lexer
-from Deliverable2Parser import Deliverable2Parser
+from deliverable2Lexer import deliverable2Lexer
+from deliverable2Parser import deliverable2Parser
 from antlr4.error.ErrorListener import ErrorListener
 
 class SyntaxErrorListener(ErrorListener):
@@ -41,11 +41,11 @@ flag = True
 
 assign1 = ""
 
-if var1 > var2:
+if var1 > var2
 	arith_op1 = 1 + 2
 	assign1 = "text data"
 
-if var1 <= var2 and var3 == var4:
+if var1 <= var2 and var3 == var4
 	arith_op1 = 1 + 2
 	assign1 = "text data"
 else:
@@ -63,9 +63,9 @@ else:
 """
 
 input_stream = InputStream(test_code)
-lexer = Deliverable2Lexer(input_stream)
+lexer = deliverable2Lexer(input_stream)
 stream = CommonTokenStream(lexer)
-parser = Deliverable2Parser(stream)
+parser = deliverable2Parser(stream)
 
 # Add custom error listener
 error_listener = SyntaxErrorListener()

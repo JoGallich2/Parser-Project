@@ -1,4 +1,4 @@
-grammar Parser1;
+grammar deliverable2;
 
 prog: s* EOF;
 
@@ -9,15 +9,25 @@ s: simple_statement | complex_statement;
 simple_statement: assignment | array_assignment;
 assignment: VARNAME '=' expr | VARNAME ('+=' | '-=' | '*=' | '/=') expr;
 array_assignment: VARNAME '=' '[' expr (',' expr)* ']';
-expr: expr ('+' | '-' | '*' | '/' | '%') expr | VARNAME | NUMBER | BOOLEAN | STRING | '('expr')';
 
+
+// Expression rules
+expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic expressions
+    | VARNAME   // Variable reference
+    | NUMBER    // Number literal
+    | BOOLEAN   // Boolean literal
+    | STRING    // String literal
+    | '(' expr ')'  // Parentheses for grouping
+    ;
 //variable for complex assignments like if or while
 complex_statement: if_statement;
+
 
 //if, elif, and else statements
 if_statement: 'if' condition ':' NEWLINE INDENT block DEDENT (elif_statement)* (else_statement)?;
 elif_statement: 'elif' condition ':' NEWLINE INDENT block DEDENT;
 else_statement: 'else:' NEWLINE INDENT block DEDENT;
+
 
 //complex aspects of complex assignments
 block: s+;
@@ -27,17 +37,18 @@ not_expr: 'not' comparison_expr | comparison_expr;
 comparison_expr: expr (('<' | '<=' | '>' | '>=' | '==' | '!=') expr)?;
 
 
-//things
+// Tokens
 VARNAME: [a-zA-Z_][a-zA-Z_0-9]*;
 NUMBER: '-'? [0-9]+ ('.'[0-9]+)?;
-STRING: '"' .*? '"' | '\'' .*? '\'';
 BOOLEAN: 'True' | 'False';
-NEWLINE: ('\r'? '\n') -> channel(HIDDEN);
+STRING: '"' .*? '"' | '\'' .*? '\'';
+WS: [ \t\r\n]+ -> skip;
+TAB: [\t]+;
 COMMENT: '#' ~[\r\n]* -> skip;
-WS: [\t]+ -> skip;
+NEWLINE: ('\r'? '\n') -> channel(HIDDEN);
+
 
 //handling indents
 INDENT: SPACES+ {getIndentationLevel() > getCurrentLevel()}?;
 DEDENT: SPACES+ {getIndentationLevel() < getCurrentLevel()}?;
 SPACES: [ ]+ -> channel(HIDDEN);
-
