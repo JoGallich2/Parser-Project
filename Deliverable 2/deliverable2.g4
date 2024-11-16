@@ -6,7 +6,7 @@ prog: s* EOF;
 s: simple_statement | complex_statement;
 
 //variable for simple assignment
-simple_statement: assignment | array_assignment | VARNAME;
+simple_statement: assignment | array_assignment | VARNAME NEWLINE;
 assignment: VARNAME '=' expr | VARNAME ('+=' | '-=' | '*=' | '/=') expr;
 array_assignment: VARNAME '=' '[' expr (',' expr)* ']';
 
@@ -24,17 +24,16 @@ complex_statement: if_statement;
 
 
 //if, elif, and else statements
-if_statement: 'if' condition ':' NEWLINE INDENT block DEDENT 
-              (elif_statement)* (else_statement)?;
+if_statement: 'if' condition ':' NEWLINE INDENT block DEDENT
+             (elif_statement)* (else_statement)?;
 
 elif_statement: 'elif' condition ':' NEWLINE INDENT block DEDENT;
 
 else_statement: 'else' ':' NEWLINE INDENT block DEDENT;
 
 
-
 //complex aspects of complex assignments
-block: s+;
+block: (simple_statement NEWLINE)*;
 condition: logical_expr;
 logical_expr: not_expr (('and' | 'or') not_expr)*;
 not_expr: 'not' comparison_expr | comparison_expr;
