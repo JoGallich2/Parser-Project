@@ -24,16 +24,17 @@ complex_statement: if_statement;
 
 
 //if, elif, and else statements
-if_statement: 'if' condition ':' NEWLINE INDENT block DEDENT
-             (elif_statement)* (else_statement)?;
+if_statement: 'if' condition ':' block
+             (elif_statement)* 
+             else_statement?;
 
-elif_statement: 'elif' condition ':' NEWLINE INDENT block DEDENT;
+elif_statement: 'elif' condition ':' block;
 
-else_statement: 'else' ':' NEWLINE INDENT block DEDENT;
+else_statement: 'else' ':' block;
 
 
 //complex aspects of complex assignments
-block: (simple_statement NEWLINE)*;
+block: (simple_statement)*;
 condition: logical_expr;
 logical_expr: not_expr (('and' | 'or') not_expr)*;
 not_expr: 'not' comparison_expr | comparison_expr;
@@ -53,5 +54,4 @@ NEWLINE: ('\r'? '\n') -> channel(HIDDEN);
 
 //handling indents
 INDENT: SPACES+ {getIndentationLevel() > getCurrentLevel()}?;
-DEDENT: SPACES+ {getIndentationLevel() < getCurrentLevel()}?;
 SPACES: [ ]+ -> channel(HIDDEN);
