@@ -37,7 +37,7 @@ else_statement: 'else' ':' block;
 block: (simple_statement )*;
 condition: logical_expr;
 logical_expr: not_expr (('and' | 'or') not_expr)*;
-not_expr: 'not' comparison_expr | comparison_expr;
+not_expr: '(not ' comparison_expr ')' | comparison_expr;
 comparison_expr: expr (('<' | '<=' | '>' | '>=' | '==' | '!=') expr)?;
 
 
