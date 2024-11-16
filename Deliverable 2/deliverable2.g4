@@ -1,4 +1,4 @@
-grammar deliverable2;
+grammar Parser1;
 
 prog: s* EOF;
 
@@ -6,52 +6,38 @@ prog: s* EOF;
 s: simple_statement | complex_statement;
 
 //variable for simple assignment
-simple_statement: assignment | array_assignment | VARNAME NEWLINE;
+simple_statement: assignment | array_assignment;
 assignment: VARNAME '=' expr | VARNAME ('+=' | '-=' | '*=' | '/=') expr;
 array_assignment: VARNAME '=' '[' expr (',' expr)* ']';
+expr: expr ('+' | '-' | '*' | '/' | '%') expr | VARNAME | NUMBER | BOOLEAN | STRING | '('expr')';
 
-
-// Expression rules
-expr: expr ('+' | '-' | '*' | '/' | '%') expr   // Arithmetic expressions
-    | VARNAME   // Variable reference
-    | NUMBER    // Number literal
-    | BOOLEAN   // Boolean literal
-    | STRING    // String literal
-    | '(' expr ')'  // Parentheses for grouping
-    ;
 //variable for complex assignments like if or while
 complex_statement: if_statement;
 
-
 //if, elif, and else statements
-if_statement: 'if' condition ':' block
-             (elif_statement)* 
-             else_statement?;
-
-elif_statement: 'elif' condition ':' block;
-
-else_statement: 'else' ':' block;
-
+if_statement: 'if' condition ':' NEWLINE INDENT block DEDENT (elif_statement)* (else_statement)?;
+elif_statement: 'elif' condition ':' NEWLINE INDENT block DEDENT;
+else_statement: 'else:' NEWLINE INDENT block DEDENT;
 
 //complex aspects of complex assignments
-block: (simple_statement )*;
+block: s+;
 condition: logical_expr;
 logical_expr: not_expr (('and' | 'or') not_expr)*;
-not_expr: 'not' comparison_expr | comparison_expr;
+not_expr: '(not' comparison_expr ')' | comparison_expr;
 comparison_expr: expr (('<' | '<=' | '>' | '>=' | '==' | '!=') expr)?;
 
 
-// Tokens
+//things
 VARNAME: [a-zA-Z_][a-zA-Z_0-9]*;
 NUMBER: '-'? [0-9]+ ('.'[0-9]+)?;
-BOOLEAN: 'True' | 'False';
 STRING: '"' .*? '"' | '\'' .*? '\'';
-WS: [ \t\r\n]+ -> skip;
-TAB: [\t]+;
-COMMENT: '#' ~[\r\n]* -> skip;
+BOOLEAN: 'True' | 'False';
 NEWLINE: ('\r'? '\n') -> channel(HIDDEN);
-
+COMMENT: '#' ~[\r\n]* -> skip;
+WS: [\t]+ -> skip;
 
 //handling indents
 INDENT: SPACES+ {getIndentationLevel() > getCurrentLevel()}?;
+DEDENT: SPACES+ {getIndentationLevel() < getCurrentLevel()}?;
 SPACES: [ ]+ -> channel(HIDDEN);
+
