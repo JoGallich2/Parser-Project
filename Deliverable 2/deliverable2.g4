@@ -34,7 +34,7 @@ else_statement: 'else' ':' block;
 
 
 //complex aspects of complex assignments
-block: (simple_statement)*;
+block: (simple_statement )*;
 condition: logical_expr;
 logical_expr: not_expr (('and' | 'or') not_expr)*;
 not_expr: 'not' comparison_expr | comparison_expr;
