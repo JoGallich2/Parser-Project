@@ -60,8 +60,9 @@ else:
 	and more...
 '''
 
-while data > 0 or data != 0:
+while data > 0 or var1 >0:
 	data = data - 1
+	var1 = var1 - 1
 	if True:
 		a = "This is the weirdest code I have ever written"
 
@@ -81,5 +82,6 @@ for i in range(0,5):
 
 ''' I need help, this code shouldn't even exist '''
 while True:
-	data = 30
 	data = data - 1
+	if data < 0:
+		break
