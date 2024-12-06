@@ -1,6 +1,6 @@
 from antlr4 import *
-from deliverable3Lexer import deliverable3Lexer
-from deliverable3Parser import deliverable3Parser
+from Deliverable3Lexer import Deliverable3Lexer
+from Deliverable3Parser import Deliverable3Parser
 from antlr4.error.ErrorListener import ErrorListener
 
 class SyntaxErrorListener(ErrorListener):
@@ -98,9 +98,9 @@ while True:
 """
 
 input_stream = InputStream(test_code)
-lexer = deliverable3Lexer(input_stream)
+lexer = Deliverable3Lexer(input_stream)
 stream = CommonTokenStream(lexer)
-parser = deliverable3Parser(stream)
+parser = Deliverable3Parser(stream)
 
 # Add custom error listener
 error_listener = SyntaxErrorListener()
