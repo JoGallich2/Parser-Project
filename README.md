@@ -21,5 +21,8 @@
     ANTLR 4.13.2 (or higher)
     JDK 11+ (required for running ANTLR tools)
 
+  **Instructions:**
+    For Setup refer to video demo on instructions on starting and testing the Parser
+
 # Video Demo
 https://youtu.be/gKCfeaOYG7A
